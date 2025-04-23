@@ -96,7 +96,7 @@ def detect_gesture():
             break
         
         elapsed_time = time.time() - start_time
-        if elapsed_time > 20:  # If no gesture detected in 20 seconds, exit
+        if elapsed_time > 20:  # If no gesture detected in 20 seconds, exit and return none
             detect_gesture = "none"
             break  
 
