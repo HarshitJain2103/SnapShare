@@ -1,96 +1,107 @@
-SnapShare – Gesture-based File and Text Sharing App
-Project Overview
-SnapShare is a lightweight tray application that allows users to share text, files, and images seamlessly over a local network. The app uses intuitive hand gestures for interactions and provides a smooth user experience with minimal setup.
+# 🚀 SnapShare
 
-Key Features
-Gesture-based Interaction: Control the app using simple hand gestures (closed fist for "copy", open hand for "paste").
+**Introducing SnapShare** – a lightweight tray application designed for seamless sharing of text, files, and images over your local network using just hand gestures.
 
-Hotkey Activation: Trigger the app with a hotkey (Control + M), which activates the webcam to recognize your gesture.
+---
 
-Local Network Sharing: Share data (text, files, images) over your local network with ease.
+## ✨ Features
 
-How it Works
-SnapShare is activated with a simple hotkey Control + M. Once triggered, the webcam activates and detects the user's gesture.
+- 📋 Copy and paste data using intuitive hand gestures:
+  - ✊ **Closed fist** → Copy  
+  - ✋ **Open hand** → Paste  
+- 💻 Runs silently in the system tray  
+- 🌐 Works over your **local network (LAN)**  
+- ⚡ Transfers **text**, **files**, **images**, and **screenshots**  
+- 🔐 Connection approval system ensures data is only shared when allowed  
 
-How to Use
-1. User A – Copying Data
-Press Control + M to activate the app and perform the copy gesture (closed fist).
+---
 
-Select a file or text to copy.
+## 🛠 How It Works
 
-SnapShare confirms the gesture and notifies User A that the selected data has been copied.
+### 🔑 Activation
 
-A local server is automatically set up on User A’s device, storing the copied data in memory.
+SnapShare is triggered with a simple hotkey:  
+**`Ctrl + M`**
 
-Periodic broadcasts are sent over the local network, making the server discoverable by other SnapShare users.
+This activates your webcam to detect hand gestures.
 
-2. User B – Pasting Data
-User B presses Control + M and performs the paste gesture (open hand).
+---
 
-SnapShare detects the gesture and searches for active servers on the local network.
+### 👤 User A – The Sender
 
-The available server (User A’s) is displayed, and User B selects it to send a connection request.
+1. User A presses **Ctrl + M** and performs the **copy gesture** after selecting a file.
+2. SnapShare:
+   - Recognizes the gesture ✅  
+   - Copies the selected file 🗂️  
+   - Notifies the user 📣  
+   - Starts a **local server** to store the copied data temporarily  
+   - Begins **broadcasting on the LAN**, making User A discoverable
 
-3. Approval Flow
-User A receives a prompt to approve or deny the connection.
+---
 
-Upon clicking Yes, the transfer begins.
+### 🧑‍🤝‍🧑 User B – The Receiver
 
-4. File Received
-Once approved, the file is transferred and saved in SnapShareDownloads folder on User B’s system (if the folder doesn’t exist, it’s created automatically).
+1. User B performs the **paste gesture**
+2. SnapShare:
+   - Detects the paste gesture  
+   - Scans the network for available users  
+   - Displays a list (e.g., “User A” appears)
+   - User B selects User A and clicks **Connect**
 
-Both users are notified when the file has been successfully received.
+---
 
-Special Behavior
-Text: If the copied data is text, it will be stored directly in User B’s clipboard.
+### ✅ Approval Flow
 
-Files/Images/Screenshots: These are saved into the SnapShareDownloads folder on User B’s system.
+- User A receives a pop-up prompt:
+  - _“User B wants to access your clipboard. Allow?”_
+- If approved:
+  - Data transfer begins immediately  
+  - If denied: Nothing is shared  
 
-Technologies Used
-Python (for development)
+---
 
-MediaPipe (for gesture detection)
+### 📂 File Storage
 
-OpenCV (for webcam integration)
+- If the data was a **file, image, or screenshot**:
+  - It is saved in the `SnapShareDownloads` folder on User B’s device  
+  - (Folder is auto-created if it doesn’t exist)
 
-Socket Programming (for local network communication)
+- If it was **text**:
+  - It is directly copied into User B’s clipboard
 
-Installation
-Clone the repository to your local machine.
+---
 
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/snapshare.git
-cd snapshare
-Create and activate a virtual environment.
+## 📸 Demo Preview
 
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-Install the required dependencies.
+Ctrl + M ➜ 3(as in ASL) ➜ SnapShare starts server ➜ ✋ on another system ➜ User detected ➜ Connect ➜ Prompt ➜ Transfer complete.
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Run the application.
+---
 
-bash
-Copy
-Edit
-python app.py
-Usage
-To activate SnapShare, press Control + M.
+## 📦 Installation & Usage
 
-Perform the appropriate hand gestures (closed fist to copy, open hand to paste).
+1. Clone the repo:
+  git clone https://github.com/HarshitJain2103/SnapShare.git
+  
+2. Install dependencies:
+  pip install -r requirements.txt
 
-Follow the on-screen instructions to share data with other users over the local network.
+4. Run the app:
+   python main.py
 
-Contribution
-Feel free to fork the repository and submit pull requests. For bugs or feature requests, please open an issue in the repository.
+---
 
-License
-This project is licensed under the MIT License – see the LICENSE file for details.
+## 📜 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 🙌 Acknowledgments
+
+Special thanks to: 
+- Everyone who helped test across multiple devices  
+- Recommended different features for the app.
+---
+
+## 🤖 Built with love at [HACKHAZARDS 2025]
+
