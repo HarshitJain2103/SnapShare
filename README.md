@@ -29,10 +29,10 @@ This activates your webcam to detect hand gestures.
 
 ### 👤 User A – The Sender
 
-1. User A presses **Ctrl + M** and performs the **copy gesture** after selecting a file.
+1. User A presses **Ctrl + M** and performs the **Copy gesture** after selecting a file/text/Screenshot.
 2. SnapShare:
    - Recognizes the gesture ✅  
-   - Copies the selected file 🗂️  
+   - Copies the selected text/file 🗂️/Screenshot to clipboard  
    - Notifies the user 📣  
    - Starts a **local server** to store the copied data temporarily  
    - Begins **broadcasting on the LAN**, making User A discoverable
@@ -55,8 +55,8 @@ This activates your webcam to detect hand gestures.
 - User A receives a pop-up prompt:
   - _“User B wants to access your clipboard. Allow?”_
 - If approved:
-  - Data transfer begins immediately  
-  - If denied: Nothing is shared  
+  - Data transfer begins immediately and both users are notified
+  - If denied: Nothing is shared and user B is notified "Access Denied!"
 
 ---
 
@@ -92,7 +92,7 @@ Ctrl + M ➜ 3(as in ASL) ➜ SnapShare starts server ➜ ✋ on another system 
 
 ## 📜 License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under a custom license. Commercial use, redistribution, or modification without the author's explicit permission is strictly prohibited.(./LICENSE).
 
 ---
 
