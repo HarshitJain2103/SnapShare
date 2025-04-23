@@ -38,7 +38,7 @@ def detect_gesture():
 
     detected_gesture = None
     gesture_detected = False
-    start_time = time.time()  # Start timer for 5 seconds
+    start_time = time.time()  # Start timer for 20 seconds
 
     while True:
         ret, frame = cap.read()
@@ -89,19 +89,16 @@ def detect_gesture():
                     predicted_label = labels[predicted_index]
                     detected_gesture = predicted_label
                     gesture_detected = True
-                    break  # Exit loop after successful prediction
-
-        # Show the frame with hand landmarks
-        #cv2.imshow("Hand Sign Detection", frame)
+                    break  
 
         # Exit if a gesture is detected
         if gesture_detected:
             break
         
         elapsed_time = time.time() - start_time
-        if elapsed_time > 20:  # If no gesture detected in 15 seconds, exit
+        if elapsed_time > 20:  # If no gesture detected in 20 seconds, exit
             detect_gesture = "none"
-            break  # Exit the loop
+            break  
 
         # Check if 'q' is pressed to break
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -110,22 +107,4 @@ def detect_gesture():
     cap.release()
     cv2.destroyAllWindows()
 
-    # Return the detected gesture (label)
     return detected_gesture
-
-# Call the function and store the result
-#detected_gesture = detect_gesture()
-
-# Print the detected gesture outside the function
-'''
-if detected_gesture:
-    print(f"Detected gesture: {detected_gesture}")  # This will print the gesture label only
-    if(detected_gesture == "5 yes"):
-        detected_gesture = "copy"
-        print(detected_gesture)
-    else:
-        detected_gesture = "paste"
-        print(detected_gesture)
-else:
-    print("No gesture detected.")
-'''
