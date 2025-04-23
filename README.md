@@ -7,7 +7,7 @@
 ## ✨ Features
 
 - 📋 Copy and paste data using intuitive hand gestures:
-  - ✊ **Closed fist** → Copy  
+  - **3(in ASL)** → Copy  
   - ✋ **Open hand** → Paste  
 - 💻 Runs silently in the system tray  
 - 🌐 Works over your **local network (LAN)**  
