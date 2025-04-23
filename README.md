@@ -92,7 +92,7 @@ Ctrl + M ➜ 3(as in ASL) ➜ SnapShare starts server ➜ ✋ on another system 
 
 ## 📜 License
 
-This project is licensed under a custom license. Commercial use, redistribution, or modification without the author's explicit permission is strictly prohibited ./LICENSE.
+This project is licensed under a [custom license](./LICENSE). Commercial use, redistribution, or modification without the author's explicit permission is strictly prohibited.
 
 ---
 
