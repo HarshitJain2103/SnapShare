@@ -108,14 +108,14 @@ python main.py
 
 ---
 
-##🔒 Privacy & Safety:
+## 🔒 Privacy & Safety:
 -Data is only transferred when the sender approves
 -Temporary servers are only hosted during active gestures
 -No internet needed — works 100% over LAN
 
 ---
 
-##🧬 Future Scope:
+## 🧬 Future Scope:
 -📈 Smart Classroom Dashboard: Track peer-to-peer usage (non-sensitive metadata)
 -🛡️ Enhanced encryption for private institutions
 -🌐 Cross-platform support for Linux/macOS
@@ -131,6 +131,6 @@ python main.py
 
 ---
 
-##🏁 Final Words:
+## 🏁 Final Words:
 -SnapShare was built to bring intuitive, real-time data sharing to educational spaces. From classrooms to hackathons, it bridges the gap between hardware and human gestures. The experience of developing this tool during HackHazards was as rewarding as the solution itself.
 ---
