@@ -17,7 +17,7 @@ This plug-and-play tray app simplifies collaboration while enhancing safety and 
 ---
 
 ## 🧠 Team & Approach  
-**Team Name:** HackHazards
+**Team Name:** Chill Guyzz
 
 **Team Members:**  
 - Harshit Jain  
@@ -64,7 +64,7 @@ _None used_
 
 ## 📽️ Demo & Deliverables  
 **Demo Video:** https://youtu.be/Q8lbBUbyUSY  
-**Pitch Deck / Slides:** [Add Google Slides or PDF link here]
+**Pitch Deck / Slides:** https://docs.google.com/presentation/d/1xrhgY28AVWgIuIoGJ0kdRSMtskmoKT1D/edit?usp=drive_link&ouid=108991902465197776434&rtpof=true&sd=true
 
 ---
 
