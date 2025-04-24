@@ -130,6 +130,10 @@ python main.py
 -All contributors and testers who helped refine SnapShare
 
 ---
+## 📜 License  
+This project is licensed under a custom license.  
+**Commercial use, redistribution, or modification without the author's explicit permission is strictly prohibited.**  
+See the full license [here](./LICENSE).
 
 ## 🏁 Final Words:
 
