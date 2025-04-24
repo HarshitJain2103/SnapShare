@@ -20,9 +20,10 @@ This plug-and-play tray app simplifies collaboration while enhancing safety and 
 **Team Name:** HackHazards
 
 **Team Members:**  
-- Harshit Jain ([GitHub](https://github.com/HarshitJain2103)) – Developer  
-- [Member 2]  
-- [Member 3]  
+- Harshit Jain  
+- Raghav Tiwari
+- Adithya V
+- Ravent Dhaiya
 
 **Our Approach:**  
 We set out to simplify how students and faculty share content on campus — reducing reliance on email, pen drives, and messaging apps.  
@@ -62,7 +63,7 @@ _None used_
 ---
 
 ## 📽️ Demo & Deliverables  
-**Demo Video:** [Add YouTube or Loom link here]  
+**Demo Video:** [https://youtu.be/Q8lbBUbyUSY]  
 **Pitch Deck / Slides:** [Add Google Slides or PDF link here]
 
 ---
@@ -78,7 +79,8 @@ _None used_
 
 **Requirements:**  
 - Python 3.10  
-- pip  
+- pip
+- tensorflow
 - MediaPipe  
 - OpenCV  
 - FastAPI  
