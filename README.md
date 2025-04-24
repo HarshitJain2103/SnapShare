@@ -123,7 +123,7 @@ python main.py
 
 ---
 
-##📎 Resources / Credits:
+## 📎 Resources / Credits:
 -MediaPipe by Google
 -FastAPI
 -OpenCV
@@ -132,5 +132,5 @@ python main.py
 ---
 
 ## 🏁 Final Words:
+
 -SnapShare was built to bring intuitive, real-time data sharing to educational spaces. From classrooms to hackathons, it bridges the gap between hardware and human gestures. The experience of developing this tool during HackHazards was as rewarding as the solution itself.
----
