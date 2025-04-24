@@ -1,107 +1,129 @@
-# 🚀 SnapShare
-
-**Introducing SnapShare** – a lightweight tray application designed for seamless sharing of text, files, and images over your local network using just hand gestures.
-
----
-
-## ✨ Features
-
-- 📋 Copy and paste data using intuitive hand gestures:
-  - **3(in ASL)** → Copy  
-  - ✋ **Open hand** → Paste  
-- 💻 Runs silently in the system tray  
-- 🌐 Works over your **local network (LAN)**  
-- ⚡ Transfers **text**, **files**, **images**, and **screenshots**  
-- 🔐 Connection approval system ensures data is only shared when allowed  
+# 🚀 SnapShare  
+**Empowering Smart Campuses with Gesture-Based Local Sharing**  
+*A lightweight tray application for seamless sharing of text, files, and images using hand gestures over the local network — no internet required.*
 
 ---
 
-## 🛠 How It Works
-
-### 🔑 Activation
-
-SnapShare is triggered with a simple hotkey:  
-**`Ctrl + M`**
-
-This activates your webcam to detect hand gestures.
+## 📌 Problem Statement  
+**Problem Statement 11 – Build a Smart Campus Infrastructure Toolkit**
 
 ---
 
-### 👤 User A – The Sender
+## 🎯 Objective  
+SnapShare is designed to support smart campuses by enabling gesture-based, touch-free data sharing between devices on the same local network. In classrooms, labs, or libraries, students and faculty can quickly exchange notes, screenshots, and files without internet, cables, or cloud storage.
 
-1. User A presses **Ctrl + M** and performs the **Copy gesture** after selecting a file/text/Screenshot.
-2. SnapShare:
-   - Recognizes the gesture ✅  
-   - Copies the selected text/file 🗂️/Screenshot to clipboard  
-   - Notifies the user 📣  
-   - Starts a **local server** to store the copied data temporarily  
-   - Begins **broadcasting on the LAN**, making User A discoverable
+This plug-and-play tray app simplifies collaboration while enhancing safety and digital interaction in educational environments.
 
 ---
 
-### 🧑‍🤝‍🧑 User B – The Receiver
+## 🧠 Team & Approach  
+**Team Name:** HackHazards
 
-1. User B performs the **paste gesture**
-2. SnapShare:
-   - Detects the paste gesture  
-   - Scans the network for available users  
-   - Displays a list (e.g., “User A” appears)
-   - User B selects User A and clicks **Connect**
+**Team Members:**  
+- Harshit Jain ([GitHub](https://github.com/HarshitJain2103)) – Developer  
+- [Member 2]  
+- [Member 3]  
 
----
-
-### ✅ Approval Flow
-
-- User A receives a pop-up prompt:
-  - _“User B wants to access your clipboard. Allow?”_
-- If approved:
-  - Data transfer begins immediately and both users are notified
-  - If denied: Nothing is shared and user B is notified "Access Denied!"
-
----
-
-### 📂 File Storage
-
-- If the data was a **file, image, or screenshot**:
-  - It is saved in the `SnapShareDownloads` folder on User B’s device  
-  - (Folder is auto-created if it doesn’t exist)
-
-- If it was **text**:
-  - It is directly copied into User B’s clipboard
+**Our Approach:**  
+We set out to simplify how students and faculty share content on campus — reducing reliance on email, pen drives, and messaging apps.  
+- **Why this problem:** Existing sharing tools often need internet, sign-ins, or manual pairing. SnapShare skips all of that using gestures and local connectivity.  
+- **Challenges tackled:**  
+  - Real-time gesture recognition  
+  - Peer discovery in local networks  
+  - Secure transfer with approval prompts  
+- **Breakthroughs:**  
+  - Hotkey-triggered webcam-based gesture detection  
+  - On-demand FastAPI server for hosting data locally  
+  - Pop-up approval to prevent accidental transfers  
 
 ---
 
-## 📸 Demo Preview
+## 🛠️ Tech Stack  
+**Core Technologies Used:**  
+- **Frontend/UI:** Tkinter (tray icon, pop-up prompts)  
+- **Gesture Detection:** MediaPipe + OpenCV  
+- **Local Server (temporary):** FastAPI (for hosting data on sender's machine)  
+- **Networking:** UDP broadcasting for peer discovery over LAN  
+- **File Handling:** OS & clipboard-based logic
 
-Ctrl + M ➜ 3(as in ASL) ➜ SnapShare starts server ➜ ✋ on another system ➜ User detected ➜ Connect ➜ Prompt ➜ Transfer complete.
-
----
-
-## 📦 Installation & Usage
-
-1. Clone the repo:
-  git clone https://github.com/HarshitJain2103/SnapShare.git
-  
-2. Install dependencies:
-  pip install -r requirements.txt
-
-4. Run the app:
-   python main.py
+**Sponsor Technologies Used:**  
+_None used_
 
 ---
 
-## 📜 License
-
-This project is licensed under a [custom license](./LICENSE). Commercial use, redistribution, or modification without the author's explicit permission is strictly prohibited.
+## ✨ Key Features  
+✅ Copy data using a hand gesture (ASL “3”)  
+✅ Paste using an open palm gesture  
+✅ Runs in system tray and is hotkey activated (Ctrl + M)  
+✅ Transfers text, files, images, and screenshots over LAN  
+✅ Shows approval prompt before any data is shared  
+✅ Automatically saves received content to local folder or clipboard  
 
 ---
 
-## 🙌 Acknowledgments
+## 📽️ Demo & Deliverables  
+**Demo Video:** [Add YouTube or Loom link here]  
+**Pitch Deck / Slides:** [Add Google Slides or PDF link here]
 
-Special thanks to: 
-- Everyone who helped test across multiple devices  
-- Recommended different features for the app.
 ---
 
-## 🤖 Built with love at [HACKHAZARDS 2025]
+## ✅ Tasks & Bonus Checklist  
+✅ Followed 2 official social channels and filled the form  
+✅ Bonus Task 1: Shared badges + filled form (2 points)  
+✅ Bonus Task 2: Signed up on Sprint.dev + filled form (3 points)  
 
+---
+
+## 🧪 How to Run the Project  
+
+**Requirements:**  
+- Python 3.10  
+- pip  
+- MediaPipe  
+- OpenCV  
+- FastAPI  
+- Tkinter (pre-installed in most Python setups)
+
+**Setup Instructions:**  
+```bash
+# Clone the repo
+git clone https://github.com/HarshitJain2103/SnapShare.git
+
+# Navigate to the project folder
+cd SnapShare
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
+python main.py
+```
+##📦 File Storage
+Text is copied directly to clipboard
+
+Files and images are saved to SnapShareDownloads/ on the receiver's machine
+
+##🔒 Privacy & Safety
+Data is only transferred when the sender approves
+
+Temporary servers are only hosted during active gestures
+
+No internet needed — works 100% over LAN
+
+##🧬 Future Scope
+📈 Smart Classroom Dashboard: Track peer-to-peer usage (non-sensitive metadata)
+
+🛡️ Enhanced encryption for private institutions
+
+🌐 Cross-platform support for Linux/macOS
+
+⚙️ Admin Mode: Enable/disable SnapShare on lab machines centrally
+
+##📎 Resources / Credits
+MediaPipe by Google
+FastAPI
+OpenCV
+All contributors and testers who helped refine SnapShare
+
+🏁 Final Words
+SnapShare was built to bring intuitive, real-time data sharing to educational spaces. From classrooms to hackathons, it bridges the gap between hardware and human gestures. The experience of developing this tool during HackHazards was as rewarding as the solution itself.
