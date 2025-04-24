@@ -63,7 +63,7 @@ _None used_
 ---
 
 ## 📽️ Demo & Deliverables  
-**Demo Video:** [https://youtu.be/Q8lbBUbyUSY]  
+**Demo Video:** https://youtu.be/Q8lbBUbyUSY  
 **Pitch Deck / Slides:** [Add Google Slides or PDF link here]
 
 ---
@@ -100,32 +100,26 @@ pip install -r requirements.txt
 # Run the app
 python main.py
 ```
-##📦 File Storage
+**📦 File Storage**
 Text is copied directly to clipboard
-
 Files and images are saved to SnapShareDownloads/ on the receiver's machine
 
-##🔒 Privacy & Safety
+**🔒 Privacy & Safety**
 Data is only transferred when the sender approves
-
 Temporary servers are only hosted during active gestures
-
 No internet needed — works 100% over LAN
 
-##🧬 Future Scope
+**🧬 Future Scope**
 📈 Smart Classroom Dashboard: Track peer-to-peer usage (non-sensitive metadata)
-
 🛡️ Enhanced encryption for private institutions
-
 🌐 Cross-platform support for Linux/macOS
-
 ⚙️ Admin Mode: Enable/disable SnapShare on lab machines centrally
 
-##📎 Resources / Credits
+**📎 Resources / Credits**
 MediaPipe by Google
 FastAPI
 OpenCV
 All contributors and testers who helped refine SnapShare
 
-🏁 Final Words
+**🏁 Final Words**
 SnapShare was built to bring intuitive, real-time data sharing to educational spaces. From classrooms to hackathons, it bridges the gap between hardware and human gestures. The experience of developing this tool during HackHazards was as rewarding as the solution itself.
