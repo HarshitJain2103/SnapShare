@@ -104,7 +104,7 @@ def upload_screenshot_to_server(server_ip):
 
 def listen_for_hotkey(label_result=None):
     while True:
-        if keyboard.is_pressed('ctrl') and keyboard.is_pressed('k'):
+        if keyboard.is_pressed('ctrl') and keyboard.is_pressed('m'):
             send_notification("SnapShare","Dectecting Gesture...")
             detect_and_display(label_result)
             time.sleep(1)  # debounce
