@@ -47,7 +47,7 @@ To simplify how students and faculty share content on campus — reducing relian
 ---
 
 ## 📽️ Demo & Deliverables  
-**Demo Video:** https://youtu.be/Q8lbBUbyUSY 
+**Demo Video:** https://youtu.be/Q8lbBUbyUSY](https://youtu.be/jmeGnu144DU 
 
 ---
 
