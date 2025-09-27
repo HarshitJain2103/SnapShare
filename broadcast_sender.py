@@ -35,7 +35,7 @@ def send_broadcast():
         if DURATION - 2 <= time.time() - start_time < DURATION:
             send_notification("SnapShare","Stopped sending data after 180 seconds")
         try:
-            sock.sendto(BROADCAST_MESSAGE.encode(), ("<broadcast>", BROADCAST_PORT))
+            sock.sendto(BROADCAST_MESSAGE.encode(), ("255.255.255.255", BROADCAST_PORT))
             print(f"🟢 Broadcast sent: {BROADCAST_MESSAGE} to port {BROADCAST_PORT}")
             time.sleep(BROADCAST_INTERVAL) 
             

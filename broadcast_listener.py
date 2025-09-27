@@ -10,7 +10,7 @@ from pathlib import Path
 from plyer import notification
 from tkinter import ttk
 BROADCAST_PORT = 54545
-TIMEOUT = 6  #Seconds
+TIMEOUT = 15  #Seconds
 
 def confirm_paste_to_user_a(user_a_ip):
     try:

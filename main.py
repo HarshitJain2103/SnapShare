@@ -34,11 +34,11 @@ def resource_path(relative_path):
 # Detect the gesture and update the label
 def detect_and_display(label_result=None):
     detected_gesture = detect_gesture()
-    if detected_gesture == "2 5":
+    if detected_gesture == "paste":
         detected_gesture = "paste"
         send_notification("Gesture Detected:", "Paste")
         threading.Thread(target=listen_for_snap2script, daemon=True).start()
-    elif detected_gesture == "3 3":
+    elif detected_gesture == "copy":
         detected_gesture = "copy"
         status = copy()
         send_notification("Copy Gesture Detected!", status)
@@ -104,7 +104,7 @@ def upload_screenshot_to_server(server_ip):
 
 def listen_for_hotkey(label_result=None):
     while True:
-        if keyboard.is_pressed('ctrl') and keyboard.is_pressed('m'):
+        if keyboard.is_pressed('ctrl') and keyboard.is_pressed('l'):
             send_notification("SnapShare","Dectecting Gesture...")
             detect_and_display(label_result)
             time.sleep(1)  # debounce

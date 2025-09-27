@@ -12,99 +12,126 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), relative_path)
 
-# Construct model and label paths using resource_path
-model_path = resource_path("model/keras_model.h5")
-labels_path = resource_path("model/labels.txt")
-# Load the model and labels
-model = tf.keras.models.load_model(model_path)
-with open(labels_path, "r") as f:
-    labels = f.read().splitlines()
-
-# Initialize mediapipe for hand detection
 mp_hands = mp.solutions.hands
-mp_drawing = mp.solutions.drawing_utils
 hands = mp_hands.Hands(
     max_num_hands=1,
     min_detection_confidence=0.7,
-    min_tracking_confidence=0.6
+    min_tracking_confidence=0.5
 )
+mp_drawing = mp.solutions.drawing_utils
 
-# Define the function to detect hand gesture
+# ==============================================================================
+# FINAL, AMBIDEXTROUS GESTURE LOGIC
+# ==============================================================================
+
+def is_fist(hand_landmarks, handedness):
+    """STRICT VERSION: Checks for a fist on either hand."""
+    # Check fingers are curled
+    finger_tips = [
+        mp_hands.HandLandmark.INDEX_FINGER_TIP, mp_hands.HandLandmark.MIDDLE_FINGER_TIP,
+        mp_hands.HandLandmark.RING_FINGER_TIP, mp_hands.HandLandmark.PINKY_TIP
+    ]
+    pip_joints = [
+        mp_hands.HandLandmark.INDEX_FINGER_PIP, mp_hands.HandLandmark.MIDDLE_FINGER_PIP,
+        mp_hands.HandLandmark.RING_FINGER_PIP, mp_hands.HandLandmark.PINKY_PIP
+    ]
+    for i in range(4):
+        if hand_landmarks.landmark[finger_tips[i]].y < hand_landmarks.landmark[pip_joints[i]].y:
+            return False
+
+    # Check thumb is tucked based on handedness
+    thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+    index_finger_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
+
+    if handedness == 'Right':
+        if thumb_tip.x < index_finger_mcp.x: return False
+    elif handedness == 'Left':
+        if thumb_tip.x > index_finger_mcp.x: return False
+
+    return True
+
+def is_open_palm(hand_landmarks, handedness):
+    """STRICTER VERSION: Checks for an open palm on either hand."""
+    # Check fingers are open
+    finger_tips = [
+        mp_hands.HandLandmark.INDEX_FINGER_TIP, mp_hands.HandLandmark.MIDDLE_FINGER_TIP,
+        mp_hands.HandLandmark.RING_FINGER_TIP, mp_hands.HandLandmark.PINKY_TIP
+    ]
+    pip_joints = [
+        mp_hands.HandLandmark.INDEX_FINGER_PIP, mp_hands.HandLandmark.MIDDLE_FINGER_PIP,
+        mp_hands.HandLandmark.RING_FINGER_PIP, mp_hands.HandLandmark.PINKY_PIP
+    ]
+    for i in range(4):
+        if hand_landmarks.landmark[finger_tips[i]].y > hand_landmarks.landmark[pip_joints[i]].y:
+            return False
+
+    # Check thumb is out based on handedness
+    thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+    index_finger_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
+
+    if handedness == 'Right':
+        if thumb_tip.x > index_finger_mcp.x: return False
+    elif handedness == 'Left':
+        if thumb_tip.x < index_finger_mcp.x: return False
+        
+    return True
+
 def detect_gesture():
     cap = cv2.VideoCapture(0)
-    offset = 30
-    model_input_size = 224
-    CONFIDENCE_THRESHOLD = 0.8
+    start_time = time.time()
+    window_size = 20
+    gesture_window = []
+    gesture = None
+    last_detected_gesture = None 
 
-    detected_gesture = None
-    gesture_detected = False
-    start_time = time.time()  # Start timer for 20 seconds
+    while cap.isOpened() and time.time() - start_time < 7:
+        success, image = cap.read()
+        if not success:
+            continue
 
-    while True:
-        ret, frame = cap.read()
-        if not ret:
-            break
+        image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+        results = hands.process(image)
+        image.flags.writeable = True
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-        frame = cv2.flip(frame, 1)  # Flip the frame to create a mirror image
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame_gesture = None
 
-        # Hand detection
-        results = hands.process(frame_rgb)
+        if results.multi_hand_landmarks and results.multi_handedness:
+            for hand_landmarks, handedness_info in zip(results.multi_hand_landmarks, results.multi_handedness):
+                handedness = handedness_info.classification[0].label
 
-        # inside detect_gesture()
-
-        if results.multi_hand_landmarks:
-            for hand_landmarks in results.multi_hand_landmarks:
-                
-                mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-
-                # Get hand landmark coordinates
-                h, w, _ = frame.shape
-                x_list = [int(landmark.x * w) for landmark in hand_landmarks.landmark]
-                y_list = [int(landmark.y * h) for landmark in hand_landmarks.landmark]
-                x_min, x_max = min(x_list) - offset, max(x_list) + offset
-                y_min, y_max = min(y_list) - offset, max(y_list) + offset
-
-                # Clamp coordinates within frame boundaries
-                x_min = max(0, x_min)
-                y_min = max(0, y_min)
-                x_max = min(w, x_max)
-                y_max = min(h, y_max)
-
-                # Check for valid crop area
-                if x_max - x_min == 0 or y_max - y_min == 0:
-                    continue  # skip this frame if invalid
-
-                # Crop and resize the hand for input to the model
-                cropped = frame[y_min:y_max, x_min:x_max]
-                resized = cv2.resize(cropped, (model_input_size, model_input_size))
-                input_data = np.expand_dims(resized, axis=0).astype(np.float32) / 255.0
-
-                # Make prediction
-                prediction = model.predict(input_data)
-                confidence = np.max(prediction)
-                predicted_index = np.argmax(prediction)
-
-                if confidence > CONFIDENCE_THRESHOLD and (predicted_index == 2 or predicted_index == 3):
-                    predicted_label = labels[predicted_index]
-                    detected_gesture = predicted_label
-                    gesture_detected = True
-                    break  
-
-        # Exit if a gesture is detected
-        if gesture_detected:
-            break
+                # Pass handedness to the logic functions
+                if is_fist(hand_landmarks, handedness):
+                    frame_gesture = "copy"
+                elif is_open_palm(hand_landmarks, handedness):
+                    frame_gesture = "paste"
         
-        elapsed_time = time.time() - start_time
-        if elapsed_time > 20:  # If no gesture detected in 20 seconds, exit and return none
-            detect_gesture = "none"
-            break  
+        if frame_gesture is not None and last_detected_gesture != frame_gesture:
+            gesture_window.clear()
 
-        # Check if 'q' is pressed to break
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        last_detected_gesture = frame_gesture
+        gesture_window.append(frame_gesture)
+        
+        if len(gesture_window) > window_size:
+            gesture_window.pop(0)
+
+        # --- OPTIONAL DEBUGGER ---
+        # Uncomment the lines below to see the debug text on the screen again
+        # copy_count = gesture_window.count("copy")
+        # paste_count = gesture_window.count("paste")
+        # cv2.putText(image, f"Copy Count: {copy_count}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+        # cv2.putText(image, f"Paste Count: {paste_count}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
+
+        valid_gestures = [g for g in gesture_window if g is not None]
+        if valid_gestures:
+            most_common = max(set(valid_gestures), key=valid_gestures.count)
+            count = valid_gestures.count(most_common)
+            if count / window_size >= 0.8 and len(gesture_window) == window_size:
+                gesture = most_common
+                break
 
     cap.release()
     cv2.destroyAllWindows()
-
-    return detected_gesture
+    print("detected gesture is :",gesture)
+    return gesture
